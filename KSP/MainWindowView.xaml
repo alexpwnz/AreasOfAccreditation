@@ -1,0 +1,110 @@
+﻿<Window x:Class="KSP.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mvvm="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:ui="clr-namespace:KSP.UI"
+        xmlns:converter="clr-namespace:KSP.UI.Converter"
+        xmlns:behavior="clr-namespace:KSP.UI.Behavior"
+        mvvm:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="Аккредитация" Height="450" Width="800">
+
+  <Window.Resources>
+    <converter:DataGridDataContextConveter x:Key="DataGridDataContextConveter" />
+  </Window.Resources>
+
+  <Grid Margin="10,0,10,10">
+    <i:Interaction.Behaviors>
+      <behavior:TrackFocusedGridControlBehavior x:Name="TrackFocusedGridBehavior" KeepLastFocusedGrid="True"
+                                                FocusedGrid="{Binding Data, Mode=OneWayToSource, Converter={StaticResource DataGridDataContextConveter}}" />
+    </i:Interaction.Behaviors>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Menu Margin="5">
+      <MenuItem Header="Отчеты">
+        <MenuItem Header="Форма 2" Command="{Binding Form2ReportCommand}" />
+      </MenuItem>
+      <MenuItem Header="Справочники">
+        <MenuItem Header="Места установки" Command="{Binding InstallationLocationCommand}" />
+        <MenuItem Header="Области измерения" Command="{Binding MeasurementFieldCommand}" />
+        <MenuItem Header="Организации" Command="{Binding OrganizationCommand}" />
+        <MenuItem Header="Типы документов" Command="{Binding DocumentTypeCommand}" />
+        <MenuItem Header="Типы Си" Command="{Binding TypeSiCommand}" />
+      </MenuItem>
+    </Menu>
+
+    <DockPanel Grid.Row="1">
+      <ui:NovigatorControl DockPanel.Dock="Bottom"
+                           DataContext="{Binding  FocusedGrid, ElementName=TrackFocusedGridBehavior, Converter={StaticResource DataGridDataContextConveter}}">
+        <ui:NovigatorControl.FooterTemplate>
+          <DataTemplate>
+            <Button Content="Закрыть" />
+          </DataTemplate>
+        </ui:NovigatorControl.FooterTemplate>
+      </ui:NovigatorControl>
+      <TabControl>
+
+        <TabItem Header="Область аккредитации">
+          <Grid Margin="10,5">
+            <i:Interaction.Triggers>
+              <i:EventTrigger EventName="Loaded">
+                <mvvm:InvokeCommandAction Command="{Binding RefreshCommand}" />
+              </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <DockPanel>
+
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="83*"/>
+                  <ColumnDefinition Width="290*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition />
+                  <RowDefinition Height="3" />
+                  <RowDefinition />
+                </Grid.RowDefinitions>
+                <ui:GridControl Grid.Row="0" DataContext="{Binding GroupSiViewModel}" Grid.ColumnSpan="2" />
+                <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" />
+                <ui:GridControl Grid.Row="2" DataContext="{Binding MeasuringInstrumentViewModel}" Grid.ColumnSpan="2" />
+              </Grid>
+            </DockPanel>
+          </Grid>
+        </TabItem>
+        <TabItem Header="Эталоны">
+          <ui:GridControl DataContext="{Binding MICatalogViewModel}" />
+        </TabItem>
+        <TabItem Header="Документы">
+          <ui:GridControl DataContext="{Binding DocumentCatalogViewModel}" />
+        </TabItem>
+      </TabControl>
+      <ui:NovigatorControl.FooterTemplate>
+        <DataTemplate>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Content="dsada"
+                    MinWidth="80"
+                    HorizontalAlignment="Left"
+                    Command="{Binding ScheduledEventCardCommand}" />
+            <Button Content="Удалить"
+                    MinWidth="80"
+                    Margin="0,0,15,0"
+                    Grid.Column="1"
+                    Command="{Binding DeleteScheduleCommand}" />
+          </Grid>
+        </DataTemplate>
+      </ui:NovigatorControl.FooterTemplate>
+    </DockPanel>
+
+  </Grid>
+
+
+</Window>

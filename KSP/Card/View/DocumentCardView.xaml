@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="KSP.Card.View.DocumentCardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:KSP.Card.View"
+             xmlns:mvvm="http://prismlibrary.com/"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             Height="200" Width="600"
+             d:DesignHeight="200" d:DesignWidth="600">
+  <StackPanel>
+    <StackPanel.Resources>
+      <Style TargetType="HeaderedContentControl">
+        <Setter Property="Margin" Value="10,5" />
+      </Style>
+    </StackPanel.Resources>
+    <HeaderedContentControl Focusable="False" Header="Тип документа:">
+      <ComboBox ItemsSource="{Binding DocumentTypes}" SelectedValue="{Binding DocumentType}" DisplayMemberPath="Name" />
+    </HeaderedContentControl>
+    <HeaderedContentControl Focusable="False" Header="Наименование документа:">
+      <TextBox Text="{Binding Name}" MaxLength="400" />
+    </HeaderedContentControl>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="10" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <HeaderedContentControl Focusable="False" Grid.Column="0" Header="Номер документа:">
+        <TextBox Text="{Binding Number}" MaxLength="100" />
+      </HeaderedContentControl>
+      <HeaderedContentControl Focusable="False" Grid.Column="2" Header="Дата документа:">
+        <DatePicker SelectedDate="{Binding Date}" />
+      </HeaderedContentControl>
+    </Grid>
+    <Grid Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+        <ColumnDefinition Width="10" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <Button Content="ОК" Command="{Binding AcceptCommand}" />
+      <Button Grid.Column="2" Content="Закрыть"
+              Command="{Binding DataContext.CloseDialogCommand, RelativeSource={RelativeSource AncestorType=local:DocumentCardView}}"
+              CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+    </Grid>
+  </StackPanel>
+</UserControl>

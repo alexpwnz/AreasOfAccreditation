@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="KSP.View.FindView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:KSP.View"
+             xmlns:ui="clr-namespace:KSP.UI"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+  <DockPanel>
+    <ui:NovigatorControl DockPanel.Dock="Bottom">
+      <ui:NovigatorControl.FooterTemplate>
+        <DataTemplate>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="10" />
+              <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Content="ОК"
+                    Command="{Binding DataContext.AcceptCommand, RelativeSource={RelativeSource AncestorType=local:FindView}}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" />
+            <Button Grid.Column="2" Content="Закрыть"
+                    Command="{Binding DataContext.CloseDialogCommand, RelativeSource={RelativeSource AncestorType=local:FindView}}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+          </Grid>
+        </DataTemplate>
+      </ui:NovigatorControl.FooterTemplate>
+    </ui:NovigatorControl>
+    <ui:GridControl />
+
+  </DockPanel>
+</UserControl>

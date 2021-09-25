@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="KSP.View.FindDocumentMiGroupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:KSP.View"
+             xmlns:dialogs="http://prismlibrary.com/"
+             dialogs:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+  <UserControl.Resources>
+    <GridLength x:Key="GridLength">10</GridLength>
+  </UserControl.Resources>
+  <dialogs:Dialog.WindowStyle>
+    <Style TargetType="Window">
+      <Setter Property="dialogs:Dialog.WindowStartupLocation" Value="CenterOwner" />
+      <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+      <Setter Property="Height" Value="780" />
+      <Setter Property="MinHeight" Value="450" />
+      <Setter Property="Width" Value="900" />
+      <Setter Property="MinWidth" Value="700" />
+      <Setter Property="SizeToContent" Value="WidthAndHeight" />
+    </Style>
+  </dialogs:Dialog.WindowStyle>
+  <DockPanel>
+
+
+    <GroupBox Header="Фильтр" Margin="10" DockPanel.Dock="Top">
+      <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+          <ColumnDefinition Width="{StaticResource GridLength}" />
+          <ColumnDefinition />
+          <ColumnDefinition Width="{StaticResource GridLength}" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <HeaderedContentControl Header="Номер:">
+          <TextBox Text="{Binding FactoryNumberFilter, UpdateSourceTrigger=PropertyChanged}" />
+        </HeaderedContentControl>
+        <HeaderedContentControl Grid.Column="2" Header="Наименование:">
+          <TextBox />
+        </HeaderedContentControl>
+        <HeaderedContentControl Grid.Column="4" Header="Тип:">
+          <TextBox />
+        </HeaderedContentControl>
+      </Grid>
+    </GroupBox>
+
+
+    <local:FindView Margin="10" />
+  </DockPanel>
+</UserControl>

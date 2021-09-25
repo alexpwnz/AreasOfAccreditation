@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C0DE006F-86B2-466E-B82C-11FD7EC035A2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>KSP</RootNamespace>
+    <AssemblyName>KSP</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalcBinding, Version=2.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CalcBinding.2.5.2\lib\net45\CalcBinding.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.3\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML.Report, Version=0.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.Report.0.2.1\lib\net46\ClosedXML.Report.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.6\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicExpresso.Core, Version=2.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicExpresso.Core.2.8.1\lib\net461\DynamicExpresso.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="MoreLinq, Version=3.3.2.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.3.2\lib\net451\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1422\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Unity.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Unity.7.2.0.1422\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1422, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq.Dynamic.Core, Version=1.2.10.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.Core.1.2.10\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1422\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=5.11.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.5.11.7\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.11.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.11.11\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BD\Context.cs" />
+    <Compile Include="BD\C__RefactorLog.cs" />
+    <Compile Include="BD\Document.cs" />
+    <Compile Include="BD\DocumentType.cs" />
+    <Compile Include="BD\DocumentView.cs" />
+    <Compile Include="BD\InstallationLocation.cs" />
+    <Compile Include="BD\KSP.cs" />
+    <Compile Include="BD\KspView.cs" />
+    <Compile Include="BD\LogEvent.cs" />
+    <Compile Include="BD\MeasurementField.cs" />
+    <Compile Include="BD\MeasuringInstrument.cs" />
+    <Compile Include="BD\MiGroup.cs" />
+    <Compile Include="BD\MiGroupDocument.cs" />
+    <Compile Include="BD\Organization.cs" />
+    <Compile Include="BD\TitleOwnershipDeed.cs" />
+    <Compile Include="BD\TypeSi.cs" />
+    <Compile Include="BD\UnitView.cs" />
+    <Compile Include="BD\VerificationTool.cs" />
+    <Compile Include="Card\ViewModel\CardBaseViewModel.cs" />
+    <Compile Include="Card\ViewModel\DocumentCardViewModel.cs" />
+    <Compile Include="Card\ViewModel\DocumentTypeCardViewModel.cs" />
+    <Compile Include="Card\ViewModel\InstallationLocationCardViewModel.cs" />
+    <Compile Include="Card\ViewModel\MeasurementFieldCardViewModel.cs" />
+    <Compile Include="Card\ViewModel\MICardViewModel.cs" />
+    <Compile Include="Card\ViewModel\OrganizationCardViewModel.cs" />
+    <Compile Include="Card\ViewModel\TypeSiCardViewModel.cs" />
+    <Compile Include="Card\View\DocumentCardView.xaml.cs">
+      <DependentUpon>DocumentCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Card\View\DocumentTypeCardView.xaml.cs">
+      <DependentUpon>DocumentTypeCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Card\View\InstallationLocationCardView.xaml.cs">
+      <DependentUpon>InstallationLocationCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Card\View\MeasurementFieldCardView.xaml.cs">
+      <DependentUpon>MeasurementFieldCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Card\View\MICardView.xaml.cs">
+      <DependentUpon>MICardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Card\View\OrganizationCardView.xaml.cs">
+      <DependentUpon>OrganizationCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Card\View\TypeSiCardView.xaml.cs">
+      <DependentUpon>TypeSiCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\ViewModel\CatalogViewModel.cs" />
+    <Compile Include="Catalog\ViewModel\DocumentTypeCatalogViewModel.cs" />
+    <Compile Include="Catalog\ViewModel\DocumentCatalogViewModel.cs" />
+    <Compile Include="Catalog\ViewModel\MICatalogViewModel.cs" />
+    <Compile Include="ViewModel\FindDocumentMiGroupViewModel.cs" />
+    <Compile Include="Catalog\ViewModel\InstallationLocationCatalogViewModel.cs" />
+    <Compile Include="Catalog\ViewModel\MeasurementFieldCatalogViewModel.cs" />
+    <Compile Include="Catalog\ViewModel\OrganizationCatalogViewModel.cs" />
+    <Compile Include="Catalog\ViewModel\TypeSiCatalogViewModel.cs" />
+    <Compile Include="Catalog\View\CatalogView.xaml.cs">
+      <DependentUpon>CatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\View\DocumentTypeCatalogView.xaml.cs">
+      <DependentUpon>DocumentTypeCatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\View\InstallationLocationCatalogView.xaml.cs">
+      <DependentUpon>InstallationLocationCatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\View\MeasurementFieldCatalogView.xaml.cs">
+      <DependentUpon>MeasurementFieldCatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\View\OrganizationCatalogView.xaml.cs">
+      <DependentUpon>OrganizationCatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Catalog\View\TypeSiCatalogView.xaml.cs">
+      <DependentUpon>TypeSiCatalogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Report.cs" />
+    <Compile Include="UI\Converter\DataGridDataContextConveter.cs" />
+    <Compile Include="UI\Converter\IntToVisibilityConveter.cs" />
+    <Compile Include="UI\Utils.cs" />
+    <Compile Include="UI\Behavior\TrackFocusedGridControlBehavior.cs" />
+    <Compile Include="ViewModel\DataViewModelBase.cs" />
+    <Compile Include="Card\ViewModel\GroupCardViewModel.cs" />
+    <Compile Include="ViewModel\FindBaseViewModel.cs" />
+    <Compile Include="ViewModel\FindDocumentOwnershipViewModel.cs" />
+    <Compile Include="ViewModel\FindMIViewModel.cs" />
+    <Compile Include="ViewModel\GroupSiViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\FindDocumenttOwnershipView.xaml.cs">
+      <DependentUpon>FindDocumenttOwnershipView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FindDocumentMiGroupView.xaml.cs">
+      <DependentUpon>FindDocumentMiGroupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FindView.xaml.cs">
+      <DependentUpon>FindView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FindMIView.xaml.cs">
+      <DependentUpon>FindMIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\MICatalogViewModel.cs" />
+    <Compile Include="UI\GridControl.xaml.cs">
+      <DependentUpon>GridControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Card\View\GroupCardView.xaml.cs">
+      <DependentUpon>GroupCardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\NovigatorControl.xaml.cs">
+      <DependentUpon>NovigatorControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Card\View\DocumentCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Card\View\DocumentTypeCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Card\View\InstallationLocationCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Card\View\MeasurementFieldCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Card\View\MICardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Card\View\OrganizationCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Card\View\TypeSiCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catalog\View\CatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catalog\View\DocumentTypeCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catalog\View\InstallationLocationCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catalog\View\MeasurementFieldCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catalog\View\OrganizationCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Catalog\View\TypeSiCatalogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FindDocumenttOwnershipView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\FindDocumentMiGroupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FindView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FindMIView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\GridControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Card\View\GroupCardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\NovigatorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Шаблон Форма2.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
