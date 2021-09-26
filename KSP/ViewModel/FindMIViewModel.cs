@@ -29,7 +29,7 @@ namespace KSP.ViewModel
         /// <inheritdoc />
         protected override string[]? SetPropertyFilter()
         {
-            return new[] {nameof(FactoryNumberFilter)};
+            return new[] {nameof(FactoryNumberFilter), nameof(TypeSiFilter),nameof(NameFilter) };
         }
 
         /// <inheritdoc />
@@ -61,10 +61,22 @@ namespace KSP.ViewModel
         /// <inheritdoc />
         protected override bool SetFilter(UnitView @object)
         {
-            var isFactory = @object.FactoryNumber?.Contains(FactoryNumberFilter) ?? true;
-            var isName = @object.TypeSi_Name?.Contains(TypeSiFilter ) ?? true; 
-            var isTypeSi = @object.TypeSi_Designation?.Contains(NameFilter) ?? true;
-            return isFactory;
+            if (@object == null) return true;
+
+            bool result= base.SetFilter(@object);
+            if (!string.IsNullOrWhiteSpace(FactoryNumberFilter))
+            {
+                result = result && @object.FactoryNumber.Contains(FactoryNumberFilter);
+            }    
+            if (!string.IsNullOrWhiteSpace(NameFilter))
+            {
+                result = result&& @object.TypeSi_Name.Contains(NameFilter);
+            }
+            if (!string.IsNullOrWhiteSpace(TypeSiFilter))
+            {
+                result = result && @object.TypeSi_Designation.Contains(TypeSiFilter);
+            }
+            return result;
         }
 
         public string NameFilter

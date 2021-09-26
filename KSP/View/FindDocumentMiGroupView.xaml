@@ -38,15 +38,13 @@
           <TextBox Text="{Binding FactoryNumberFilter, UpdateSourceTrigger=PropertyChanged}" />
         </HeaderedContentControl>
         <HeaderedContentControl Grid.Column="2" Header="Наименование:">
-          <TextBox />
+          <TextBox Text="{Binding NameFilter, UpdateSourceTrigger=PropertyChanged}"/>
         </HeaderedContentControl>
         <HeaderedContentControl Grid.Column="4" Header="Тип:">
-          <TextBox />
+          <TextBox Text="{Binding DocumentTypeFilter, UpdateSourceTrigger=PropertyChanged}"/>
         </HeaderedContentControl>
       </Grid>
     </GroupBox>
-
-
     <local:FindView Margin="10" />
   </DockPanel>
 </UserControl>
