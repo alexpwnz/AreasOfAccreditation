@@ -9,17 +9,29 @@ namespace KSP.ViewModel
     public class FindDocumentOwnershipViewModel: FindBaseViewModel<DocumentView>
     {
         private string _numberFilter;
+        private string _nameFilter;
+        private string _documentTypeFilter;
 
         public string NumberFilter
         {
             get => _numberFilter;
             set => _numberFilter = value;
         }
+        public string NameFilter
+        {
+            get => _nameFilter;
+            set => _nameFilter = value;
+        }
+        public string DocumentTypeFilter
+        {
+            get => _documentTypeFilter;
+            set => _documentTypeFilter = value;
+        }
 
         /// <inheritdoc />
-        protected override string[]? SetPropertyFilter()
+        protected override string[] SetPropertyFilter()
         {
-            return new[] { nameof(NumberFilter) };
+            return new[] { nameof(NumberFilter), nameof(NameFilter), nameof(DocumentTypeFilter) };
         }
 
         /// <inheritdoc />
@@ -35,9 +47,22 @@ namespace KSP.ViewModel
         /// <inheritdoc />
         protected override bool SetFilter(DocumentView @object)
         {
-            //if (string.IsNullOrWhiteSpace(@object.FactoryNumber)) return false;
-            return @object.Number?.Contains(NumberFilter) ?? true;
-            //return .Contains(FactoryNumberFilter);
+            if (@object == null) return true;
+
+            bool result = base.SetFilter(@object);
+            if (!string.IsNullOrWhiteSpace(NumberFilter))
+            {
+                result = result && @object.Number.Contains(NumberFilter);
+            }
+            if (!string.IsNullOrWhiteSpace(NameFilter))
+            {
+                result = result && @object.Name.Contains(NameFilter);
+            }
+            if (!string.IsNullOrWhiteSpace(DocumentTypeFilter))
+            {
+                result = result && @object.DocumentType_Name.Contains(DocumentTypeFilter);
+            }
+            return result;
         }
 
      

@@ -385,7 +385,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 .idea/
+<<<<<<< HEAD
 *.sln.iml
 /KSPBD/bin/
 /KSPBD/bin/
 /KSPBD/obj/
+=======
+*.sln.iml
+>>>>>>> eaed9dad414fb9bc711677ea6c0f51b741f1919b
