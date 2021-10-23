@@ -51,67 +51,67 @@ DECLARE @query  NVARCHAR(max)
     ;with ctemk ([IDEKZ], [IDSPVDMK], [IDGRSI], [DTMKFK]) as 
     (
       select MK.[IDEKZ], MK.[IDSPVDMK], MK.[IDGRSI], MAX(MK.[DTMKFK]) 
-      from [OGMetr].dbo.[EKZMK] MK
-        join [OGMetr].dbo.[SPVDMK] VDMK on  MK.[IDSPVDMK] = VDMK.[IDSPVDMK]
-      where MK.[DTMKFK] is not NULL and  VDMK.[NMVDMK] =[OGMetr].dbo.GetTxtDesc(7907)
+      from [dev_Metr7_OGMetr].dbo.[EKZMK] MK
+        join [dev_Metr7_OGMetr].dbo.[SPVDMK] VDMK on  MK.[IDSPVDMK] = VDMK.[IDSPVDMK]
+      where MK.[DTMKFK] is not NULL and  VDMK.[NMVDMK] =[dev_Metr7_OGMetr].dbo.GetTxtDesc(7907)
 	  
       group by MK.[IDEKZ], MK.[IDSPVDMK], MK.[IDGRSI]
     )
 	insert into #lastMK(idekzmk)
-    select distinct [OGMetr].dbo.[EKZMK].[IDEKZMK]     
-    from [OGMetr].dbo.[EKZMK] 
-    join [OGMetr].dbo.[EKZ] on [OGMetr].dbo.[EKZ].[IDEKZ] = [OGMetr].dbo.[EKZMK].[IDEKZ]
-    join ctemk on [OGMetr].dbo.[EKZMK].[IDEKZ] = ctemk.idekz and 
-                  [OGMetr].dbo.[EKZMK].[IDSPVDMK] = ctemk.idspvdmk 
-				   and                   [OGMetr].dbo.[EKZMK].[DTMKFK] = ctemk.dtmkfk 
-				   and                   ISNULL( [OGMetr].dbo.[EKZMK].[IDGRSI], 0) = ISNULL(ctemk.idgrsi, 0)
-				   WHERE [OGMetr].dbo.[EKZ].[IDEKZ] IN (SELECT [OGMetr].dbo.[EKZ].[IDEKZ] FROM [OGMetr].dbo.[EKZ] JOIN [OGMetr].dbo.[EKZETL] ON [OGMetr].dbo.[EKZETL].[IDEKZ]=[OGMetr].dbo.[EKZ].[IDEKZ])
+    select distinct [dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZMK]     
+    from [dev_Metr7_OGMetr].dbo.[EKZMK] 
+    join [dev_Metr7_OGMetr].dbo.[EKZ] on [dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ] = [dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZ]
+    join ctemk on [dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZ] = ctemk.idekz and 
+                  [dev_Metr7_OGMetr].dbo.[EKZMK].[IDSPVDMK] = ctemk.idspvdmk 
+				   and                   [dev_Metr7_OGMetr].dbo.[EKZMK].[DTMKFK] = ctemk.dtmkfk 
+				   and                   ISNULL( [dev_Metr7_OGMetr].dbo.[EKZMK].[IDGRSI], 0) = ISNULL(ctemk.idgrsi, 0)
+				   WHERE [dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ] IN (SELECT [dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ] FROM [dev_Metr7_OGMetr].dbo.[EKZ] JOIN [dev_Metr7_OGMetr].dbo.[EKZETL] ON [dev_Metr7_OGMetr].dbo.[EKZETL].[IDEKZ]=[dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ])
 
 
 
-SELECT [OGMetr].dbo.[EKZ].[IDEKZ],
-[OGMetr].dbo.[EKZ].[NNZV],
-[OGMetr].dbo.[EKZ].[NNIN],
-[OGMetr].dbo.[EKZ].[NNEKZGR],
-[OGMetr].dbo.[EKZ].[DTVP],
-[OGMetr].dbo.[EKZ].[DTVVEK],
-[OGMetr].dbo.[TPRZ].[IDTPRZ],
-[OGMetr].dbo.[TIPS].[TP],
-[OGMetr].dbo.[SPNMTP].[NMTP],
-[OGMetr].dbo.[EKZETL].[NMEKZETLGR],
-[OGMetr].dbo.[EKZETL].[NNEKZETLGR],
-[OGMetr].dbo.[EKZETL].[NNEKZETLGPEGR],
-[OGMetr].dbo.[EKZETL].[NNEKZSIETLFIF],
-[OGMetr].dbo.[EKZETL].[RangeDescr],
-[OGMetr].dbo.[EKZETL].[AccuracyCharacteristicDescr],
-[OGMetr].dbo.[VerifHierarchySchemeRankClassifier].[Name] AS [VerifHierarchySchemeRankClassifier],
-[OGMetr].dbo.[DMS].[NND],
-[OGMetr].dbo.[EKZMK].[DTMKFK], 
-[OGMetr].dbo.[EKZ].[IDFRPDIZ], --Данные организаций Изготовитель
-[OGMetr].dbo.[EKZ].[IDFRPDV],-- Владелец
-[OGMetr].dbo.[EKZ].[IDSPDPKL2],
-[OGMetr].dbo.[EKZETL].[IDEKZETL],
-(SELECT SUBSTRING([OGMetr].dbo.[EKZMKDH].[LINKNNFIF], LEN([OGMetr].dbo.[EKZMKDH].[LINKNNFIF]) - CHARINDEX('/', REVERSE([OGMetr].dbo.[EKZMKDH].[LINKNNFIF]))+2, LEN([OGMetr].dbo.[EKZMKDH].[LINKNNFIF])) 
-FROM [OGMetr].dbo.[EKZMKDH]
-WHERE [OGMetr].dbo.[EKZMKDH].[IDEKZMK]=[OGMetr].dbo.[EKZMK].[IDEKZMK]) AS [LINKNNFIF],
- DATEADD(day,-1, DATEADD(mm,[OGMetr].dbo.[EKZMK].[PRMK],[OGMetr].dbo.[EKZMK].[DTMKFK])) AS DTGDDO
+SELECT [dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ],
+[dev_Metr7_OGMetr].dbo.[EKZ].[NNZV],
+[dev_Metr7_OGMetr].dbo.[EKZ].[NNIN],
+[dev_Metr7_OGMetr].dbo.[EKZ].[NNEKZGR],
+[dev_Metr7_OGMetr].dbo.[EKZ].[DTVP],
+[dev_Metr7_OGMetr].dbo.[EKZ].[DTVVEK],
+[dev_Metr7_OGMetr].dbo.[TPRZ].[IDTPRZ],
+[dev_Metr7_OGMetr].dbo.[TIPS].[TP],
+[dev_Metr7_OGMetr].dbo.[SPNMTP].[NMTP],
+[dev_Metr7_OGMetr].dbo.[EKZETL].[NMEKZETLGR],
+[dev_Metr7_OGMetr].dbo.[EKZETL].[NNEKZETLGR],
+[dev_Metr7_OGMetr].dbo.[EKZETL].[NNEKZETLGPEGR],
+[dev_Metr7_OGMetr].dbo.[EKZETL].[NNEKZSIETLFIF],
+[dev_Metr7_OGMetr].dbo.[EKZETL].[RangeDescr],
+[dev_Metr7_OGMetr].dbo.[EKZETL].[AccuracyCharacteristicDescr],
+[dev_Metr7_OGMetr].dbo.[VerifHierarchySchemeRankClassifier].[Name] AS [VerifHierarchySchemeRankClassifier],
+[dev_Metr7_OGMetr].dbo.[DMS].[NND],
+[dev_Metr7_OGMetr].dbo.[EKZMK].[DTMKFK], 
+[dev_Metr7_OGMetr].dbo.[EKZ].[IDFRPDIZ], --Данные организаций Изготовитель
+[dev_Metr7_OGMetr].dbo.[EKZ].[IDFRPDV],-- Владелец
+[dev_Metr7_OGMetr].dbo.[EKZ].[IDSPDPKL2],
+[dev_Metr7_OGMetr].dbo.[EKZETL].[IDEKZETL],
+(SELECT SUBSTRING([dev_Metr7_OGMetr].dbo.[EKZMKDH].[LINKNNFIF], LEN([dev_Metr7_OGMetr].dbo.[EKZMKDH].[LINKNNFIF]) - CHARINDEX('/', REVERSE([dev_Metr7_OGMetr].dbo.[EKZMKDH].[LINKNNFIF]))+2, LEN([dev_Metr7_OGMetr].dbo.[EKZMKDH].[LINKNNFIF])) 
+FROM [dev_Metr7_OGMetr].dbo.[EKZMKDH]
+WHERE [dev_Metr7_OGMetr].dbo.[EKZMKDH].[IDEKZMK]=[dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZMK]) AS [LINKNNFIF],
+ DATEADD(day,-1, DATEADD(mm,[dev_Metr7_OGMetr].dbo.[EKZMK].[PRMK],[dev_Metr7_OGMetr].dbo.[EKZMK].[DTMKFK])) AS DTGDDO
  
    into #infoSourse
-  FROM [OGMetr].dbo.[EKZ] 
-JOIN [OGMetr].dbo.[TPRZ] ON [OGMetr].dbo.[TPRZ].[IDTPRZ]=  [OGMetr].dbo.[EKZ].[IDTPRZ]
-JOIN [OGMetr].dbo.[TIPS] ON [OGMetr].dbo.[TIPS].[IDTIPS] = [OGMetr].dbo.[TPRZ].[IDTIPS]
-JOIN [OGMetr].dbo.[SPNMTP] ON [OGMetr].dbo.[SPNMTP].[IDSPNMTP]=[OGMetr].dbo.[TIPS].[IDSPNMTP]
-LEFT JOIN [OGMetr].dbo.[FRPD]  [FRPDIZ] ON [FRPDIZ].[IDFRPD]=[OGMetr].dbo.[EKZ].[IDFRPDIZ]
-LEFT JOIN [OGMetr].dbo.[FRPD]  [FRPDVL] ON [FRPDVL].[IDFRPD]=[OGMetr].dbo.[EKZ].[IDFRPDV]
-LEFT JOIN [OGMetr].dbo.[FRPDRK] [FRPDRKIZ] ON [FRPDRKIZ].[IDFRPD]=[FRPDIZ].[IDFRPD]
-LEFT JOIN [OGMetr].dbo.[FRPDRK] [FRPDRKVL]ON [FRPDRKVL].[IDFRPD]=[FRPDVL].[IDFRPD]
-JOIN [OGMetr].dbo.[EKZETL] ON [OGMetr].dbo.[EKZETL].[IDEKZ]=[OGMetr].dbo.[EKZ].[IDEKZ]
-LEFT JOIN [OGMetr].dbo.[VerifHierarchySchemeRankClassifier] ON [OGMetr].dbo.[EKZETL].[IdVerifHierarchySchemeRank]=[OGMetr].dbo.[VerifHierarchySchemeRankClassifier].[Id]
-LEFT JOIN [OGMetr].dbo.[EKZMK] ON [OGMetr].dbo.[EKZMK].[IDEKZ]=[OGMetr].dbo.[EKZ].[IDEKZ] AND [OGMetr].dbo.[EKZMK].[IDEKZMK] IN (SELECT * FROM #lastMK)
-LEFT JOIN [OGMetr].dbo.[DMS] ON [OGMetr].[dbo].[DMS].[IDOD]=[OGMetr].dbo.[EKZMK].[IDEKZMK] AND [OGMetr].[dbo].[DMS].[IDVDODVDD] = 
+  FROM [dev_Metr7_OGMetr].dbo.[EKZ] 
+JOIN [dev_Metr7_OGMetr].dbo.[TPRZ] ON [dev_Metr7_OGMetr].dbo.[TPRZ].[IDTPRZ]=  [dev_Metr7_OGMetr].dbo.[EKZ].[IDTPRZ]
+JOIN [dev_Metr7_OGMetr].dbo.[TIPS] ON [dev_Metr7_OGMetr].dbo.[TIPS].[IDTIPS] = [dev_Metr7_OGMetr].dbo.[TPRZ].[IDTIPS]
+JOIN [dev_Metr7_OGMetr].dbo.[SPNMTP] ON [dev_Metr7_OGMetr].dbo.[SPNMTP].[IDSPNMTP]=[dev_Metr7_OGMetr].dbo.[TIPS].[IDSPNMTP]
+LEFT JOIN [dev_Metr7_OGMetr].dbo.[FRPD]  [FRPDIZ] ON [FRPDIZ].[IDFRPD]=[dev_Metr7_OGMetr].dbo.[EKZ].[IDFRPDIZ]
+LEFT JOIN [dev_Metr7_OGMetr].dbo.[FRPD]  [FRPDVL] ON [FRPDVL].[IDFRPD]=[dev_Metr7_OGMetr].dbo.[EKZ].[IDFRPDV]
+LEFT JOIN [dev_Metr7_OGMetr].dbo.[FRPDRK] [FRPDRKIZ] ON [FRPDRKIZ].[IDFRPD]=[FRPDIZ].[IDFRPD]
+LEFT JOIN [dev_Metr7_OGMetr].dbo.[FRPDRK] [FRPDRKVL]ON [FRPDRKVL].[IDFRPD]=[FRPDVL].[IDFRPD]
+JOIN [dev_Metr7_OGMetr].dbo.[EKZETL] ON [dev_Metr7_OGMetr].dbo.[EKZETL].[IDEKZ]=[dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ]
+LEFT JOIN [dev_Metr7_OGMetr].dbo.[VerifHierarchySchemeRankClassifier] ON [dev_Metr7_OGMetr].dbo.[EKZETL].[IdVerifHierarchySchemeRank]=[dev_Metr7_OGMetr].dbo.[VerifHierarchySchemeRankClassifier].[Id]
+LEFT JOIN [dev_Metr7_OGMetr].dbo.[EKZMK] ON [dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZ]=[dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ] AND [dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZMK] IN (SELECT * FROM #lastMK)
+LEFT JOIN [dev_Metr7_OGMetr].dbo.[DMS] ON [dev_Metr7_OGMetr].[dbo].[DMS].[IDOD]=[dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZMK] AND [dev_Metr7_OGMetr].[dbo].[DMS].[IDVDODVDD] = 
   --получаем ID типа документа (свидетельства)
-  (SELECT idvdodvdd from [OGMetr].dbo.[VDODVDD] v where v.[IDSPVDOD] = 2 and v.[IDSPVDD] = 6)
-    WHERE  [OGMetr].dbo.[EKZETL].[IsDeleted] is NULL
+  (SELECT idvdodvdd from [dev_Metr7_OGMetr].dbo.[VDODVDD] v where v.[IDSPVDOD] = 2 and v.[IDSPVDD] = 6)
+    WHERE  [dev_Metr7_OGMetr].dbo.[EKZETL].[IsDeleted] is NULL
   GO
 -- удаляем временную таблицу для хранения списка последних событий
 drop table #lastMK
@@ -121,7 +121,7 @@ GO
 
 
 --Заполняем данными Типы СИ объедением
-MERGE [OGMetr_KSP_test].dbo.[TypeSi] AS target
+MERGE [KSPBD].dbo.[TypeSi] AS target
     USING (Select [IDTPRZ],[NMTP],[TP] FROM #infoSourse GROUP BY  [IDTPRZ],[NMTP],[TP]) AS source 
     ON (target.[IdExt] = source.[IDTPRZ])
     WHEN MATCHED THEN 
@@ -137,10 +137,10 @@ GO
 
 
 --Заполняем данными Организации объедением
-MERGE [OGMetr_KSP_test].dbo.[Organization] AS target
-    USING (Select Distinct   [OGMetr].dbo.[FRPD].[IDFRPD],[NMFRPD], [REGION], [COUNTRY], [NMTPVL]  FROM [OGMetr].dbo.[FRPD]  
-    LEFT JOIN [OGMetr].dbo.[FRPDRK] ON [FRPDRK].[IDFRPD]=[OGMetr].dbo.[FRPD].[IDFRPD]    
-    LEFT JOIN [OGMetr].dbo.[SPTPVL] ON [OGMetr].dbo.[SPTPVL].[IDSPTPVL]=[FRPDRK].[IDSPTPVL]) AS source 
+MERGE [KSPBD].dbo.[Organization] AS target
+    USING (Select Distinct   [dev_Metr7_OGMetr].dbo.[FRPD].[IDFRPD],[NMFRPD], [REGION], [COUNTRY], [NMTPVL]  FROM [dev_Metr7_OGMetr].dbo.[FRPD]  
+    LEFT JOIN [dev_Metr7_OGMetr].dbo.[FRPDRK] ON [FRPDRK].[IDFRPD]=[dev_Metr7_OGMetr].dbo.[FRPD].[IDFRPD]    
+    LEFT JOIN [dev_Metr7_OGMetr].dbo.[SPTPVL] ON [dev_Metr7_OGMetr].dbo.[SPTPVL].[IDSPTPVL]=[FRPDRK].[IDSPTPVL]) AS source 
     ON (target.[IdExt] = source.[IDFRPD])
     WHEN MATCHED THEN 
         UPDATE SET [Name] = source.[NMFRPD],
@@ -157,8 +157,8 @@ WHEN NOT MATCHED THEN
 
 GO
 --Заполняем данными  место установки из доп класса 2 объедением
-MERGE [OGMetr_KSP_test].dbo.[InstallationLocation] AS target
-    USING (SELECT [IDSPDPKL2],[NMDPKL2]  FROM [OGMetr].[dbo].[SPDPKL2] ) AS source 
+MERGE [KSPBD].dbo.[InstallationLocation] AS target
+    USING (SELECT [IDSPDPKL2],[NMDPKL2]  FROM [dev_Metr7_OGMetr].[dbo].[SPDPKL2] ) AS source 
     ON (target.[IdExt] = source.[IDSPDPKL2])
     WHEN MATCHED THEN 
         UPDATE SET [Name] = source.[NMDPKL2]
@@ -170,14 +170,14 @@ WHEN NOT MATCHED THEN
 GO
 
 --заполняем информацию об измерительном оборудовании объедением
-MERGE [OGMetr_KSP_test].dbo.[MeasuringInstrument] AS target
-    USING ( SELECT Distinct [NNZV], [NNIN], (SELECT Id FROM [OGMetr_KSP_test].dbo.TypeSi WHERE IdExt=[IDTPRZ]) AS [FK_TypeSi],
+MERGE [KSPBD].dbo.[MeasuringInstrument] AS target
+    USING ( SELECT Distinct [NNZV], [NNIN], (SELECT Id FROM [KSPBD].dbo.TypeSi WHERE IdExt=[IDTPRZ]) AS [FK_TypeSi],
 		    [NNEKZGR], 
-			(SELECT Id FROM [OGMetr_KSP_test].dbo.[Organization] WHERE IdExt=[IDFRPDV]) AS [FK_Ownership],
-			(SELECT Id FROM [OGMetr_KSP_test].dbo.[InstallationLocation] WHERE IdExt= [IDSPDPKL2]) AS [FK_InstallationLocation],
+			(SELECT Id FROM [KSPBD].dbo.[Organization] WHERE IdExt=[IDFRPDV]) AS [FK_Ownership],
+			(SELECT Id FROM [KSPBD].dbo.[InstallationLocation] WHERE IdExt= [IDSPDPKL2]) AS [FK_InstallationLocation],
 			[DTVP],
 			[DTVVEK],
-			(SELECT Id FROM [OGMetr_KSP_test].dbo.[Organization] WHERE IdExt=[IDFRPDIZ]) AS [FK_Manufacturer],
+			(SELECT Id FROM [KSPBD].dbo.[Organization] WHERE IdExt=[IDFRPDIZ]) AS [FK_Manufacturer],
 			[IDEKZ] FROM #infoSourse) AS source 
     ON (target.[IdExt] = source.[IDEKZ])
     WHEN MATCHED THEN 
@@ -209,12 +209,12 @@ WHEN NOT MATCHED THEN
 GO
 
 --заполняем информацию об эталонах объедением
-MERGE [OGMetr_KSP_test].dbo.[VerificationTool] AS target
+MERGE [KSPBD].dbo.[VerificationTool] AS target
     USING ( SELECT  [NMEKZETLGR],[NNEKZETLGR],[NNEKZETLGPEGR],[NNEKZSIETLFIF],[NND], [DTMKFK], [DTGDDO],[RangeDescr],[AccuracyCharacteristicDescr]
 		   ,[VerifHierarchySchemeRankClassifier]
-		   ,[OGMetr_KSP_test].dbo.[MeasuringInstrument].[Id] AS [EKZ] 
+		   ,[KSPBD].dbo.[MeasuringInstrument].[Id] AS [EKZ] 
 		   ,[IDEKZETL], [LINKNNFIF] FROM #infoSourse 
-		   JOIN  [OGMetr_KSP_test].dbo.[MeasuringInstrument] ON [OGMetr_KSP_test].dbo.[MeasuringInstrument].[IdExt]=#infoSourse.[IDEKZ]) AS source 
+		   JOIN  [KSPBD].dbo.[MeasuringInstrument] ON [KSPBD].dbo.[MeasuringInstrument].[IdExt]=#infoSourse.[IDEKZ]) AS source 
     ON (target.[IdExt] = source.[IDEKZETL])
     WHEN MATCHED THEN 
         UPDATE SET [Name] = source.[NMEKZETLGR],
@@ -253,8 +253,8 @@ WHEN NOT MATCHED THEN
  GO
 
 --Заполняем информацию об областях измерения объедением
-MERGE [OGMetr_KSP_test].dbo.[MeasurementField] AS target
-    USING (SELECT [NMOI],[KDOI], [IDSPOI] FROM [OGMetr].dbo.[SPOI]) AS source 
+MERGE [KSPBD].dbo.[MeasurementField] AS target
+    USING (SELECT [NMOI],[KDOI], [IDSPOI] FROM [dev_Metr7_OGMetr].dbo.[SPOI]) AS source 
     ON (target.[IdExt] = source.[IDSPOI])
     WHEN MATCHED THEN 
         UPDATE SET [Name] = source.[NMOI],

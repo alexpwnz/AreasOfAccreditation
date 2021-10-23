@@ -18,9 +18,8 @@ namespace KSP.BD
         }
         [Browsable(false)]
         public int Id { get; set; }
-
+        [Display(Name = "Тип документа")]
         [StringLength(10)]
-        [Display(Name = "Типа документа")]
         public string Name { get; set; }
         [Browsable(false)]
         public int? IdExt { get; set; }

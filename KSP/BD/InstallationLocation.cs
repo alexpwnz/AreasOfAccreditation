@@ -19,8 +19,8 @@ namespace KSP.BD
         [Browsable(false)]
         public int Id { get; set; }
 
-        [StringLength(300)]
         [Display(Name = "Наименование")]
+        [StringLength(300)]
         public string Name { get; set; }
         [Browsable(false)]
         public int? IdExt { get; set; }

@@ -1,7 +1,8 @@
 ﻿CREATE VIEW [dbo].[UnitView]	
     WITH SCHEMABINDING	
 	AS SELECT 
-       [MeasuringInstrument].[Id]
+       ROW_NUMBER() OVER(ORDER BY [MeasuringInstrument].[Id]) as [Uid]    
+       ,[MeasuringInstrument].[Id]
       ,[VerificationTool].[Name]
       ,[VerificationTool].[VerificationNumber]
       ,[VerificationTool].[FirsVerificationNumber]
@@ -28,4 +29,6 @@
     JOIN [dbo].[TypeSi] ON [TypeSi].[Id]=[MeasuringInstrument].[FK_TypeSi]
     LEFT JOIN [dbo].[InstallationLocation] ON [InstallationLocation].[Id]=[MeasuringInstrument].[FK_InstallationLocation]    
     LEFT JOIN [dbo].[Organization] [Manufacturer]ON [Manufacturer].[Id]=[MeasuringInstrument].[FK_Manufacturer]
-    LEFT JOIN [dbo].[Organization] [Ownership]ON [Manufacturer].[Id]=[MeasuringInstrument].[FK_Ownership]
+    LEFT JOIN [dbo].[Organization] [Ownership]ON [Manufacturer].[Id]=[MeasuringInstrument].[FK_Ownership]   
+    GO
+

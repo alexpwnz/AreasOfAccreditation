@@ -21,8 +21,8 @@ namespace KSP.BD
         public int Id { get; set; }
 
         [Required]
-        [StringLength(300)]
         [Display(Name = "Наименование")]
+        [StringLength(300)]
         public string Name { get; set; }
 
         [StringLength(100)]

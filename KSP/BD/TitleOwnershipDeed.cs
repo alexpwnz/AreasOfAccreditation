@@ -1,5 +1,3 @@
-using System.ComponentModel;
-
 namespace KSP.BD
 {
     using System;
@@ -16,13 +14,13 @@ namespace KSP.BD
         public int FK_MeasuringInstrument { get; set; }
 
         public int FK_Document { get; set; }
-        [Browsable(false)]
+
         public int? IdExt { get; set; }
-        [Browsable(false)]
+
         public Guid? GuidExt { get; set; }
-        [Browsable(false)]
+
         public virtual Document Document { get; set; }
-        [Browsable(false)]
+
         public virtual MeasuringInstrument MeasuringInstrument { get; set; }
     }
 }

@@ -32,10 +32,10 @@ namespace KSP.BD
         public int? FK_DocumentType { get; set; }
         [Browsable(false)]
         public virtual DocumentType DocumentType { get; set; }
-        [Browsable(false)]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MiGroupDocument> MiGroupDocuments { get; set; }
-        [Browsable(false)]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TitleOwnershipDeed> TitleOwnershipDeeds { get; set; }
     }

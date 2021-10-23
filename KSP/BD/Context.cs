@@ -23,12 +23,14 @@ namespace KSP.BD
         public virtual DbSet<MiGroup> MiGroups { get; set; }
         public virtual DbSet<MiGroupDocument> MiGroupDocuments { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TitleOwnershipDeed> TitleOwnershipDeeds { get; set; }
         public virtual DbSet<TypeSi> TypeSis { get; set; }
         public virtual DbSet<VerificationTool> VerificationTools { get; set; }
-        public virtual DbSet<KspView> KspViews { get; set; }
-        public virtual DbSet<UnitView> UnitViews { get; set; }
         public virtual DbSet<DocumentView> DocumentViews { get; set; }
+        public virtual DbSet<KspView> KspViews { get; set; }
+        public virtual DbSet<MiGroupView> MiGroupViews { get; set; }
+        public virtual DbSet<UnitView> UnitViews { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -100,7 +102,14 @@ namespace KSP.BD
                 .WithRequired(e => e.TypeSi)
                 .HasForeignKey(e => e.FK_TypeSi)
                 .WillCascadeOnDelete(false);
-         
+
+            modelBuilder.Entity<KspView>()
+                .Property(e => e.MiGroupDocument)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<KspView>()
+                .Property(e => e.TitleDocument)
+                .IsUnicode(false);
         }
     }
 }

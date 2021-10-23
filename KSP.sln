@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSP", "KSP\KSP.csproj", "{C
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "KSPBD", "KSPBD\KSPBD.sqlproj", "{BC7C3A13-EFDB-4898-89D7-CF82B809D91D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C7529F17-ABCC-4623-81DD-5D75F37CB3A4}"
+	ProjectSection(SolutionItems) = preProject
+		VisualStudio.gitignore = VisualStudio.gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
