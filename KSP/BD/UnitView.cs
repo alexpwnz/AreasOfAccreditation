@@ -15,25 +15,26 @@ namespace KSP.BD
         [Browsable(false)]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long Uid { get; set; }
+
+        [Browsable(false)]
         public int Id { get; set; }
         [Display(Name = "Наименование эталона")]
         [StringLength(1200)]
         public string Name { get; set; }
-
-        [StringLength(32)]
         [Display(Name = "№ эталона в ФИФ ОЕИ")]
+        [StringLength(32)]
         public string VerificationNumber { get; set; }
-
-        [StringLength(32)]
         [Display(Name = "№ ГПЭ")]
-        public string FirsVerificationNumber { get; set; }
-
         [StringLength(32)]
+        public string FirsVerificationNumber { get; set; }
         [Display(Name = "№ по реестру ФИФ ОЕИ")]
+        [StringLength(32)]
         public string MiVerificationNumber { get; set; }
         [Display(Name = "Номер свидетельства")]
         [StringLength(30)]
         public string CertificateNumber { get; set; }
+
         [Display(Name = "Дата свидетельства")]
         [Column(TypeName = "date")]
         public DateTime? CertificateDate { get; set; }

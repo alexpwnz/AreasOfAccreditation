@@ -11,6 +11,7 @@ namespace KSP.BD
     [Table("VerificationTool")]
     public partial class VerificationTool
     {
+        [Key]
         [Browsable(false)]
         public int Id { get; set; }
 

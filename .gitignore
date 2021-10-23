@@ -388,7 +388,6 @@ FodyWeavers.xsd
 <<<<<<< HEAD
 *.sln.iml
 /KSPBD/bin/
-/KSPBD/bin/
 /KSPBD/obj/
 =======
 *.sln.iml

@@ -1,6 +1,8 @@
 ﻿CREATE VIEW [dbo].[KspView]
 	AS
-	SELECT DISTINCT [MeasuringInstrument].[CommissioningDate],
+	SELECT DISTINCT 
+	ROW_NUMBER() OVER(ORDER BY [MeasuringInstrument].[FactoryNumber]) as [Uid]   
+	,[MeasuringInstrument].[CommissioningDate],
 	[MeasuringInstrument].[FactoryNumber],
 	[InstallationLocation].[Name] AS [Name_InstallationLocation],
 	[MeasuringInstrument].[InventoryNumber],
@@ -40,7 +42,7 @@
 	JOIN [dbo].[MeasuringInstrument] on [KSP].[FK_MeasuringInstrument] =[MeasuringInstrument].[Id]--Добавляем измерительные устройства
 	JOIN [dbo].[MiGroup] on [KSP].[FK_MiGroup]=[MiGroup].[Id] --Добавляем группу си
 	JOIN [dbo].[MeasurementField] ON [MeasurementField].[Id]=[MiGroup].[FK_MeasurementField] --добавляем область измерения
-	LEFT JOIN [dbo].[VerificationTool] ON [VerificationTool].[Id]=[MeasuringInstrument].[Id] --добавляем сведения о эталонах/поверках
+	LEFT JOIN [dbo].[VerificationTool] ON [VerificationTool].[FK_MeasuringInstrument]=[MeasuringInstrument].[Id] --добавляем сведения о эталонах/поверках
 	JOIN [dbo].[TypeSi] ON [TypeSi].[Id]=[MeasuringInstrument].[FK_TypeSi] --добавляем сведения о типе СИ
 	LEFT JOIN [dbo].[Organization] [Owner] ON [Owner].[Id]=[MeasuringInstrument].[FK_Ownership] -- добавляем сведения о владельце
 	LEFT JOIN [dbo].[InstallationLocation] ON [InstallationLocation].[Id]=[MeasuringInstrument].FK_InstallationLocation -- добавляем сведения о месте установки
