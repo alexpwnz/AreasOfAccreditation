@@ -126,20 +126,21 @@ namespace KSP.Card.ViewModel
             return context.MeasuringInstruments.FindAsync(parametr.Id);
         }
 
+        private readonly SemaphoreSlim _mySemaphoreSlim = new SemaphoreSlim(1,1);
         /// <inheritdoc />
-        protected override async Task SynchronizationAsync(Context context, SynchronizationDirection synchronizationDirection)
+        protected override async Task SynchronizationAsync(Context context,
+            SynchronizationDirection synchronizationDirection, CancellationToken token)
         {
-            
             switch (synchronizationDirection)
             {
                 case SynchronizationDirection.Direct:
                     VerificationToolViewModel.Filter = Entity;
                     DocumentMIViewModel.Filter = Entity;
-                    DocumentMIViewModel.RefreshAsync(default);
-                    VerificationToolViewModel.RefreshAsync(default);
-                    OrganizationList = await context.Organizations.ToArrayAsync();
-                    TypeSiList = await context.TypeSis.ToArrayAsync();
-                    InstallationLocationList = await context.InstallationLocations.ToArrayAsync();
+                    DocumentMIViewModel.RefreshAsync(token);
+                    VerificationToolViewModel.RefreshAsync(token);
+                    OrganizationList = await context.Organizations.ToArrayAsync(token);
+                    TypeSiList = await context.TypeSis.ToArrayAsync(token);
+                    InstallationLocationList = await context.InstallationLocations.ToArrayAsync(token);
                     FactoryNumber = Entity.FactoryNumber;
                     InventoryNumber = Entity.InventoryNumber;
                     RegistrationNumber = Entity.RegistrationNumber;
@@ -223,7 +224,8 @@ namespace KSP.Card.ViewModel
         /// <inheritdoc />
         protected override Task<VerificationTool[]> LoadData(Context context, CancellationToken token)
         {
-            return Filter == null ? context.VerificationTools.ToArrayAsync(token)
+            var sadsa = context.VerificationTools.ToArrayAsync(token);
+            return Filter == null ? sadsa
                 : context.VerificationTools.Where(q =>q.FK_MeasuringInstrument==((MeasuringInstrument)Filter).Id).ToArrayAsync(token);
         }
 

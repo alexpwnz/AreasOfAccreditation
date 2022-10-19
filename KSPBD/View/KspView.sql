@@ -49,9 +49,5 @@
 	LEFT JOIN [dbo].[Organization] [Manufacturer] ON [Manufacturer].[Id]=[MeasuringInstrument].[FK_Manufacturer] --Добавляем сведения о изготовителе
 	LEFT JOIN [dbo].[TitleOwnershipDeed] ON [TitleOwnershipDeed].[FK_MeasuringInstrument] =[MeasuringInstrument].[Id]   --добавляем связь о право устанавливающем документе
 	LEFT JOIN [dbo].[Document] [TitleDocument] ON [TitleDocument].[Id]=[TitleOwnershipDeed].[FK_Document] -- добавляем связь с право устанавливающем документом
-	LEFT JOIN [dbo].[MiGroupDocument] ON [MiGroupDocument].[FK_MiGroup]=[MiGroup].[Id] --добавляем связь о МП для групп 
-	--LEFT JOIN [dbo].[Document] [MiGrDocument] ON [MiGroupDocument].Id=[MiGroupDocument].[FK_Document] -- добавляем МП для группы
-	--LEFT JOIN [dbo].[DocumentType] [MiGrDocumentType] ON [MiGrDocument].[FK_DocumentType] =[MiGrDocumentType].[Id]
-	--LEFT JOIN [dbo].[DocumentType] [TitleDocumentType] ON [MiGrDocument].[FK_DocumentType] =[TitleDocumentType].[Id]
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using KSP.BD;
@@ -14,6 +15,7 @@ namespace KSP.Card.ViewModel
     {
         private T _entity;
         private string _title;
+        private CancellationTokenSource _cancellationTokenSource;
 
         #region Public Property
 
@@ -40,6 +42,7 @@ namespace KSP.Card.ViewModel
             get => _entity;
             set =>  SetProperty(ref _entity ,value);
         }
+        
 
         #endregion
 
@@ -49,6 +52,7 @@ namespace KSP.Card.ViewModel
         /// <param name="dialogService">The dialog service.</param>
         protected CardBaseViewModel(IDialogService dialogService)
         {
+            _cancellationTokenSource = new CancellationTokenSource();
             RefreshCommand = new DelegateCommand(OnRefreshCommand);
             CloseDialogCommand = new DelegateCommand<IDialogWindow>(OnCloseDialogCommand);
             AcceptCommand = new DelegateCommand(OnAcceptCommand);
@@ -73,13 +77,20 @@ namespace KSP.Card.ViewModel
         {
             if (parameters == null) throw new NullReferenceException($@"{nameof(parameters)} not initialized");
             var parametr = parameters.GetValue<T>(typeof(T).Name);
+
+            lock (_cancellationTokenSource)
+            {
+                _cancellationTokenSource?.Cancel();
+                _cancellationTokenSource = null;
+                _cancellationTokenSource = new CancellationTokenSource();
+            }
             using (var context = new Context())
             {
                 var type = typeof(T);
                 Entity = (int) type.GetProperty("Id")?.GetValue(parametr) != 0
                     ? await GetEntity(parametr, context)
                     : new T();
-                await SynchronizationAsync(context, SynchronizationDirection.Direct);
+                await SynchronizationAsync(context, SynchronizationDirection.Direct, _cancellationTokenSource.Token);
             }
         }
 
@@ -108,7 +119,14 @@ namespace KSP.Card.ViewModel
             {
                 var type = typeof(T);
                 var id = (int) type.GetProperty("Id").GetValue(Entity);
-                await SynchronizationAsync(context, SynchronizationDirection.Reverse);
+
+                lock (_cancellationTokenSource)
+                {
+                    _cancellationTokenSource?.Cancel();
+                    _cancellationTokenSource = null;
+                    _cancellationTokenSource = new CancellationTokenSource();
+                }
+                await SynchronizationAsync(context, SynchronizationDirection.Reverse, _cancellationTokenSource.Token);
                 if (id == 0)
                 {
                     AddItem(context);
@@ -131,19 +149,22 @@ namespace KSP.Card.ViewModel
             RaisePropertyChanged(nameof(Entity));
         }
 
-        private async void OnRefreshCommand()
+        private void OnRefreshCommand()
         {
-            using (var context = new Context())
+            using Context context = new Context();
+            lock (_cancellationTokenSource)
             {
-                await SynchronizationAsync(context, SynchronizationDirection.Direct);
+                _cancellationTokenSource?.Cancel();
+                _cancellationTokenSource = null;
+                _cancellationTokenSource = new CancellationTokenSource();
             }
-           
+            SynchronizationAsync(context, SynchronizationDirection.Direct, _cancellationTokenSource.Token);
         }
 
 
         protected abstract Task<T> GetEntity(T parametr, Context context);
 
-        protected abstract Task SynchronizationAsync(Context context, SynchronizationDirection synchronizationDirection);
+        protected abstract Task SynchronizationAsync(Context context, SynchronizationDirection direction, CancellationToken token);
 
         #region Nested type: SynchronizationDirection
 

@@ -5,6 +5,7 @@ using Prism.Services.Dialogs;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KSP.Card.ViewModel
@@ -16,6 +17,7 @@ namespace KSP.Card.ViewModel
         private string _number;
         private DocumentType _documentType;
         private DocumentType[] _documentTypes;
+        private CardBaseViewModel<Document> _cardBaseViewModelImplementation;
 
         public string Name
         {
@@ -60,12 +62,12 @@ namespace KSP.Card.ViewModel
         }
 
         /// <inheritdoc />
-        protected override async Task SynchronizationAsync(Context context, SynchronizationDirection synchronizationDirection)
+        protected override async Task SynchronizationAsync(Context context, SynchronizationDirection synchronizationDirection, CancellationToken token)
         {
             switch (synchronizationDirection)
             {
                 case SynchronizationDirection.Direct:
-                    DocumentTypes = await context.DocumentTypes.OrderBy(q => q.Name).ToArrayAsync();
+                    DocumentTypes = await context.DocumentTypes.OrderBy(q => q.Name).ToArrayAsync(token);
                     //MeasuringInstrumentViewModel.Filter = Entity;
                     //DocumentCatalogViewModel.Filter = Entity;
                     Name = Entity?.Name;

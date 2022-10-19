@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using KSP.BD;
 using KSP.Card.ViewModel;
 using KSP.Catalog.ViewModel;
@@ -112,9 +114,17 @@ namespace KSP.ViewModel
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private async void OnRefreshCommand()
         {
-            await GroupSiViewModel.RefreshAsync(_cancellationTokenSource.Token);
-            await DocumentCatalogViewModel.RefreshAsync(_cancellationTokenSource.Token);
-            await MICatalogViewModel.RefreshAsync(_cancellationTokenSource.Token);
+            try
+            {
+                await GroupSiViewModel.RefreshAsync(_cancellationTokenSource.Token);
+                await DocumentCatalogViewModel.RefreshAsync(_cancellationTokenSource.Token);
+                await MICatalogViewModel.RefreshAsync(_cancellationTokenSource.Token);
+            }
+            catch (TaskCanceledException)
+            {
+                //ignored
+            }
+           
         }
     }
 }

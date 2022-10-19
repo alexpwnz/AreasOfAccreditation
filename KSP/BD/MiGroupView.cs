@@ -21,15 +21,15 @@ namespace KSP.BD
         public int Id { get; set; }
         
         [Column(Order = 1)]
-        [StringLength(300)]
+        [StringLength(1000)]
         public string Characteristic { get; set; }
         
         [Column(Order = 2)]
-        [StringLength(200)]
+        [StringLength(1000)]
         public string Name { get; set; }
         
         [Column(Order = 3)]
-        [StringLength(300)]
+        [StringLength(1000)]
         public string Range { get; set; }
 
         [StringLength(200)]

@@ -37,16 +37,16 @@ namespace KSP.Card.ViewModel
         }
 
         /// <inheritdoc />
-        protected override async Task SynchronizationAsync(Context context, SynchronizationDirection synchronizationDirection)
+        protected override async Task SynchronizationAsync(Context context, SynchronizationDirection synchronizationDirection, CancellationToken token)
         {
             switch (synchronizationDirection)
             {
                 case SynchronizationDirection.Direct:
-                    MeasurementFieldList = await context.MeasurementFields.OrderBy(q => q.Code).ToArrayAsync();
+                    MeasurementFieldList = await context.MeasurementFields.OrderBy(q => q.Code).ToArrayAsync(token);
                     MeasuringInstrumentViewModel.Filter = Entity;
                     DocumentMiGroupViewModel.Filter = Entity;
-                    MeasuringInstrumentViewModel.RefreshAsync(default);
-                    DocumentMiGroupViewModel.RefreshAsync(default);
+                    MeasuringInstrumentViewModel.RefreshAsync(token);
+                    DocumentMiGroupViewModel.RefreshAsync(token);
                     Code = Entity?.Code;
                     Range = Entity?.Range;
                     Name = Entity?.Name;

@@ -63,7 +63,8 @@
         </HeaderedContentControl>
 
         <HeaderedContentControl Focusable="False" Grid.Column="4" Header="Наименование">
-          <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Visible" />
         </HeaderedContentControl>
       </Grid>
       <Grid>

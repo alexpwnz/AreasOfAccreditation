@@ -46,7 +46,7 @@ namespace KSP.BD
         /// <summary>
         /// Позволяет получать и задавать метрологическую характеристики группы си.
         /// </summary>
-        [StringLength(300)]
+        [StringLength(1000)]
         public string MiGroup_Characteristic { get; set; }
         /// <summary>
         /// Позволяет получать и задавать код группы СИ.
@@ -58,13 +58,13 @@ namespace KSP.BD
         /// Позволяет получать и задавать наименование группы СИ.
         /// </summary>
         [Column(Order = 2)]
-        [StringLength(200)]
+        [StringLength(1000)]
         public string MiGroup_Name { get; set; }
         /// <summary>
         /// Позволяет получать и задавать диапазон группы СИ.
         /// </summary>
         [Key] [Column(Order = 3)]
-        [StringLength(300)]
+        [StringLength(1000)]
         public string MiGroup_Range { get; set; }
         /// <summary>
         /// Позволяет получать и задавать код области измерения.

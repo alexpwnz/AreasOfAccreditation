@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using KSP.BD;
 using Prism.Services.Dialogs;
 
@@ -63,8 +64,7 @@ namespace KSP.Card.ViewModel
         }
 
         /// <inheritdoc />
-        protected override async Task SynchronizationAsync(Context context,
-            SynchronizationDirection synchronizationDirection)
+        protected override async Task SynchronizationAsync(Context context, SynchronizationDirection synchronizationDirection, CancellationToken token)
         {
             switch (synchronizationDirection)
             {

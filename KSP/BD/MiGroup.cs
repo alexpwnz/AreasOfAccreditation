@@ -25,16 +25,16 @@ namespace KSP.BD
         public string Code { get; set; }
         [Display(Name = "Наименование")]
         [Required]
-        [StringLength(200)]
+        [StringLength(1000)]
         public string Name { get; set; }
 
         [Display(Name = "Характеристика")]
         [Required]
-        [StringLength(300)]
+        [StringLength(1000)]
         public string Characteristic { get; set; }
         [Display(Name = "Диапазон")]
         [Required]
-        [StringLength(300)]
+        [StringLength(1000)]
         public string Range { get; set; }
         [Browsable(false)]
         public int FK_MeasurementField { get; set; }

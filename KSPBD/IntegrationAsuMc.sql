@@ -53,7 +53,7 @@ DECLARE @query  NVARCHAR(max)
       select MK.[IDEKZ], MK.[IDSPVDMK], MK.[IDGRSI], MAX(MK.[DTMKFK]) 
       from [dev_Metr7_OGMetr].dbo.[EKZMK] MK
         join [dev_Metr7_OGMetr].dbo.[SPVDMK] VDMK on  MK.[IDSPVDMK] = VDMK.[IDSPVDMK]
-      where MK.[DTMKFK] is not NULL and  VDMK.[NMVDMK] =[dev_Metr7_OGMetr].dbo.GetTxtDesc(7907)
+      where MK.[DTMKFK] is not NULL and  (VDMK.[NMVDMK] = 'Поверка' or VDMK.[NMVDMK] = 'Аттестация')
 	  
       group by MK.[IDEKZ], MK.[IDSPVDMK], MK.[IDGRSI]
     )
@@ -107,7 +107,7 @@ LEFT JOIN [dev_Metr7_OGMetr].dbo.[FRPDRK] [FRPDRKIZ] ON [FRPDRKIZ].[IDFRPD]=[FRP
 LEFT JOIN [dev_Metr7_OGMetr].dbo.[FRPDRK] [FRPDRKVL]ON [FRPDRKVL].[IDFRPD]=[FRPDVL].[IDFRPD]
 JOIN [dev_Metr7_OGMetr].dbo.[EKZETL] ON [dev_Metr7_OGMetr].dbo.[EKZETL].[IDEKZ]=[dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ]
 LEFT JOIN [dev_Metr7_OGMetr].dbo.[VerifHierarchySchemeRankClassifier] ON [dev_Metr7_OGMetr].dbo.[EKZETL].[IdVerifHierarchySchemeRank]=[dev_Metr7_OGMetr].dbo.[VerifHierarchySchemeRankClassifier].[Id]
-LEFT JOIN [dev_Metr7_OGMetr].dbo.[EKZMK] ON [dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZ]=[dev_Metr7_OGMetr].dbo.[EKZ].[IDEKZ] AND [dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZMK] IN (SELECT * FROM #lastMK)
+LEFT JOIN [OGMetr_2022_01_24].dbo.[EKZMK] ON [OGMetr_2022_01_24].dbo.[EKZMK].[IDEKZETL]=[OGMetr_2022_01_24].dbo.[EKZETL].[IDEKZETL] AND [OGMetr_2022_01_24].dbo.[EKZMK].[IDEKZMK] IN (SELECT * FROM #lastMK)
 LEFT JOIN [dev_Metr7_OGMetr].dbo.[DMS] ON [dev_Metr7_OGMetr].[dbo].[DMS].[IDOD]=[dev_Metr7_OGMetr].dbo.[EKZMK].[IDEKZMK] AND [dev_Metr7_OGMetr].[dbo].[DMS].[IDVDODVDD] = 
   --получаем ID типа документа (свидетельства)
   (SELECT idvdodvdd from [dev_Metr7_OGMetr].dbo.[VDODVDD] v where v.[IDSPVDOD] = 2 and v.[IDSPVDD] = 6)
@@ -209,6 +209,7 @@ WHEN NOT MATCHED THEN
 GO
 
 --заполняем информацию об эталонах объедением
+
 MERGE [KSPBD].dbo.[VerificationTool] AS target
     USING ( SELECT  [NMEKZETLGR],[NNEKZETLGR],[NNEKZETLGPEGR],[NNEKZSIETLFIF],[NND], [DTMKFK], [DTGDDO],[RangeDescr],[AccuracyCharacteristicDescr]
 		   ,[VerifHierarchySchemeRankClassifier]

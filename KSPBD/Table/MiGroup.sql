@@ -2,9 +2,9 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Code] NVARCHAR(10) NOT NULL, 
-    [Name] NVARCHAR(200) NOT NULL, 
-    [Characteristic] NVARCHAR(300) NOT NULL, 
-    [Range] NVARCHAR(300) NOT NULL, 
+    [Name] NVARCHAR(1000) NOT NULL, 
+    [Characteristic] NVARCHAR(1000) NOT NULL, 
+    [Range] NVARCHAR(1000) NOT NULL, 
     [FK_MeasurementField] INT NOT NULL, 
     [IdExt] INT NULL , 
     [GuidExt] UNIQUEIDENTIFIER NULL 
